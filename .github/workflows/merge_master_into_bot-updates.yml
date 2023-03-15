@@ -1,0 +1,25 @@
+name: Pull request merging master into bot-updates
+on:
+  workflow_dispatch:
+jobs:
+  bot-updatesPromotion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: bot-updates
+      - name: Reset promotion branch
+        run: |
+          git fetch origin master:master
+          git reset --hard master
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: bot-updates-promotion
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: squash
