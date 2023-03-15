@@ -1,4 +1,4 @@
-name: Pull request merging master into bot-updates
+name: Merging master into bot-updates
 on:
   workflow_dispatch:
 jobs:
