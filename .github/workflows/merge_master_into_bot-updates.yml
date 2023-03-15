@@ -16,8 +16,8 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
-          branch: bot-updates-promotion
           token: ${{ secrets.PAT }}
+          branch: bot-updates-promotion
       - name: Enable Pull Request Automerge
         if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: peter-evans/enable-pull-request-automerge@v2
