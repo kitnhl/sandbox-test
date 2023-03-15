@@ -1,8 +1,6 @@
 name: Pull request merging master into bot-updates
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
 jobs:
   bot-updatesPromotion:
     runs-on: ubuntu-latest
